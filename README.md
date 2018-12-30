@@ -44,11 +44,10 @@ make typecheck
 make fmt
 # error on bad formatting
 make fmt-check
+make lint
 
 # testing
 make test
-# runs typecheck, test, fmt-check
-make ci
 # runs fmt, typecheck, build
 make all 
 

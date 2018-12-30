@@ -14,6 +14,8 @@ fmt:
 fmt-check:
 	poetry run black . --check
 
+lint: fmt-check typecheck
+
 test:
 	poetry run pytest
 
@@ -32,6 +34,4 @@ uninstall-program:
 publish: build
 	poetry publish
 
-ci: typecheck test fmt-check
-
-all: fmt typecheck build
+all: lint test build
