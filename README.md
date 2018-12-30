@@ -34,13 +34,36 @@ optional arguments:
 ```
 
 ## Development
+[Poetry][poetry] is necessary to install this project for development.
 ```sh
 # install dependencies
-poetry install
+make install
 
-# run program
+# linting
+make typecheck
+make fmt
+# error on bad formatting
+make fmt-check
+
+# testing
+make test
+# runs typecheck, test, fmt-check
+make ci
+# runs fmt, typecheck, build
+make all 
+
+# building/publishing
+make clean
+make build
+make publish
+# build and install program directly
+make install-program
+make uninstall-program
+
+# run program (we can't pass args to Make)
 poetry run awsudo
 ```
+[poetry]: https://github.com/sdispater/poetry
 
 ## Prior Art
 There are a lot of similar programs to this one. I believe [makethunder/awsudo][0] and [electronicarts/awsudo][1] are the best alternatives. The only problems with [makethunder/awsudo][0] are that it isn't published on pypi and that it doesn't use the newest api for caching sessions. [electronicarts/awsudo][1] has all of the features, but it uses an internal session cache, instead of sharing with awscli. If you need SAML support though, the internal cache is a necessary compromise, so this package is great in that case.

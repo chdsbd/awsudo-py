@@ -1,28 +1,37 @@
 .DEFAULT_GOAL := all
 
-.PHONY: typecheck
+.PHONY: install, typecheck, fmt, fmt-check, test, clean, build, install-program, publish, ci
+
+install:
+	poetry install
+
 typecheck:
 	poetry run mypy .
 
-.PHONY: fmt
 fmt:
 	poetry run black .
 
-.PHONY: test
+fmt-check:
+	poetry run black . --check
+
 test:
 	poetry run pytest
 
-.PHONY: clean
 clean:
-	rm -f awsudo-py-*.tar.gz awsudo-py-*.whl
+	rm -rf dist *.egg-info
 
-.PHONY: build
 build: clean
 	poetry build
 
-.PHONY: ci
-# error on bad formatting
-ci: typecheck test
-	poetry run black . --check
+install-program: build
+	python3 -m pip install dist/awsudo-py-*.tar.gz 
+
+uninstall-program:
+	python3 -m pip uninstall awsudo-py
+
+publish: build
+	poetry publish
+
+ci: typecheck test fmt-check
 
 all: fmt typecheck build
