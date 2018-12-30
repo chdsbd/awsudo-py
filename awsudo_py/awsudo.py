@@ -74,7 +74,7 @@ def parse_args() -> Tuple[str, str, List[str]]:
         "-p", "--profile", help="AWS Profile to assume", default="default"
     )
     parser.add_argument(
-        "executable", help="executable to run", required=True, metavar="PROG"
+        "executable", help="executable to run", metavar="PROG"
     )
     parser.add_argument(
         "args", help="args to run with program", nargs="*", metavar="ARG"

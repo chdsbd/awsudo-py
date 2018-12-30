@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "awsudo-py"
-version = "0.1.0"
+version = "0.1.1"
 description = "A sudo-like tool to configure AWS environment variables and call programs"
 authors = ["Christopher Dignam <chris@dignam.xyz>"]
 license = "GPL-3.0-or-later"
