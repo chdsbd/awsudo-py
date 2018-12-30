@@ -1,4 +1,4 @@
-# awsudo
+# awsudo [![CircleCI](https://circleci.com/gh/chdsbd/awsudo-py.svg?style=svg)](https://circleci.com/gh/chdsbd/awsudo-py) [![pypi](https://img.shields.io/pypi/v/awsudo-py.svg)](https://pypi.org/project/awsudo-py/)
 > A sudo-like tool to configure AWS environment variables and call programs
 
 This script is useful for programs like Terraform, which doesn't support MFA when assuming roles. 
