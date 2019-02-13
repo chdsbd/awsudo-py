@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/python:3.6.1
+      - image: circleci/python:3.6.5
 
     steps:
       - checkout
@@ -32,7 +32,7 @@ jobs:
           command: make test
   lint:
     docker:
-      - image: circleci/python:3.6.1
+      - image: circleci/python:3.6.5
 
     steps:
       - checkout

@@ -66,7 +66,7 @@ def get_environment(credentials: Dict[str, str]) -> Environment:
     return environ
 
 
-def parse_args() -> Tuple[str, str, List[str]]:
+def parse_args(args: List[str]) -> Tuple[str, str, List[str]]:
     parser = argparse.ArgumentParser(
         description="Set environment variables using profile"
     )
@@ -75,22 +75,22 @@ def parse_args() -> Tuple[str, str, List[str]]:
     )
     parser.add_argument("executable", help="executable to run", metavar="PROG")
     parser.add_argument(
-        "args", help="args to run with program", nargs="*", metavar="ARG"
+        "args", nargs=argparse.REMAINDER, help=argparse.SUPPRESS, metavar="ARG"
     )
     # print help on error
-    if len(sys.argv) < 2:
+    if len(args) < 2:
         parser.print_help()
         parser.exit(2)
-
-    parsed = parser.parse_args()
-    executable: str = parsed.executable
-    profile: str = parsed.profile
-    args: List[str] = parsed.args
-    return executable, profile, args
+    parsed = parser.parse_args(args=args[1:])
+    return (
+        cast(str, parsed.executable),
+        cast(str, parsed.profile),
+        cast(List[str], parsed.args),
+    )
 
 
 def main() -> NoReturn:
-    executable, profile, args = parse_args()
+    executable, profile, args = parse_args(sys.argv)
     credentials = get_credentials(profile)
     environment = get_environment(credentials)
     run_program(executable, args, env=environment)
